@@ -1,3 +1,5 @@
+DROP PROCEDURE IF EXISTS `CreateCountry`;
+
 DELIMITER $$
 
 CREATE PROCEDURE `CreateCountry`(
@@ -15,7 +17,7 @@ BEGIN
 	START TRANSACTION;
 	INSERT INTO country(name, code) VALUES (country_name, country_code);
 	SET new_country_id = LAST_INSERT_ID();
-	INSERT INTO language(country_id, name) VALUES (new_country_id, language_name);
+	CALL AddLanguagesForCountry(new_country_id, language_name_list);
 	COMMIT;
 	SELECT @new_country_id;
 END$$
