@@ -25,12 +25,12 @@ CALL CreateCountry('Switzerland', 44, 'German;French;Italian;Romansh', @country_
 
 ## Adding languages to the existing instance of a country
 ```sql
-CALL AddLanguagesForCountry(<existingCountryId>, <languageList>);
+CALL AddLanguagesForCountry(<existingCountryId>, <languageList>, @is_success);
 ```
 
 #### Case for adding languages set for the existing instance of the country
 ```sql
-CALL AddLanguagesForCountry(5, 'Spanish;French');
+CALL AddLanguagesForCountry(5, 'Spanish;French', @is_success);
 ```
 
 
