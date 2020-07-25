@@ -1,8 +1,8 @@
-DROP PROCEDURE IF EXISTS `AddLanguagesForCountry`;
+DROP PROCEDURE IF EXISTS `add_languages_for_country`;
 
 DELIMITER $$
 
-CREATE PROCEDURE `AddLanguagesForCountry`(
+CREATE PROCEDURE `add_languages_for_country`(
 	IN country_id INT,
 	IN language_name_list TEXT,
 	OUT is_success TINYINT
@@ -25,7 +25,7 @@ BEGIN
 		START TRANSACTION;
 	END IF;
 
-	forEachLanguage: LOOP
+	for_each_language: LOOP
 		SET str_len = CHAR_LENGTH(language_name_list);
         	SET language_name = SUBSTRING_INDEX(language_name_list, ';', 1);
 		INSERT INTO language(country_id, name) VALUES (country_id, language_name);
@@ -33,9 +33,9 @@ BEGIN
 		SET language_name_list = MID(language_name_list, sub_str_len, str_len);
 
 		IF language_name_list = '' THEN
-			LEAVE forEachLanguage;
+			LEAVE for_each_language;
 		END IF;
-	END LOOP forEachLanguage;
+	END LOOP for_each_language;
 
 	IF is_in_transaction != 1 THEN
 		COMMIT;
