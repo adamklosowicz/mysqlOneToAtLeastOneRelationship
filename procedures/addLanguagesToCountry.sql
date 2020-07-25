@@ -1,8 +1,8 @@
-DROP PROCEDURE IF EXISTS `add_languages_for_country`;
+DROP PROCEDURE IF EXISTS `add_languages_to_country`;
 
 DELIMITER $$
 
-CREATE PROCEDURE `add_languages_for_country`(
+CREATE PROCEDURE `add_languages_to_country`(
 	IN country_id INT,
 	IN language_name_list TEXT,
 	OUT is_success TINYINT
