@@ -5,12 +5,13 @@ DELIMITER $$
 CREATE PROCEDURE `create_country`(
 	IN country_name VARCHAR(150),
 	IN country_code INT,
-	IN language_name VARCHAR(50),
+	IN language_name_list TEXT,
 	OUT new_country_id INT
 )
 BEGIN
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
+		SET new_country_id = NULL;
 		ROLLBACK;
 	END;
 
