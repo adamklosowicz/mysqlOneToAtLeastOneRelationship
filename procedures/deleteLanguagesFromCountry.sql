@@ -31,13 +31,11 @@ BEGIN
 		SET @tmp_query = CONCAT('SELECT count(*) INTO @verified_languages_count FROM language ', tmp_where);
 		PREPARE select_stmt FROM @tmp_query;
 		EXECUTE select_stmt;
+		DEALLOCATE PREPARE select_stmt;
 
 		IF languages_selected_count != @verified_languages_count THEN
-			DEALLOCATE PREPARE select_stmt;
 			SET is_success = -2;
 		ELSE
-			DEALLOCATE PREPARE select_stmt;
-
 			SET @tmp_query = CONCAT('DELETE FROM language ', tmp_where);
 			SET SQL_SAFE_UPDATES = 0;
 			PREPARE delete_stmt FROM @tmp_query;
