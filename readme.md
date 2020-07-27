@@ -55,7 +55,7 @@ CALL delete_language_from_country(5, 'English', @is_success);
 
 #### Case for removing many languages from the existing instance of the country
 ```sql
-CALL delete_language_from_country(8, 'French;Spanish', @is_success);
+CALL delete_languages_from_country(8, 'French;Spanish', @is_success);
 ```
 
 ---
@@ -65,4 +65,4 @@ CALL delete_language_from_country(8, 'French;Spanish', @is_success);
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
 
 - **[MIT license](http://opensource.org/licenses/mit-license.php)**
-- Copyright 2020 © <a href="http://klosowi.cz" target="_blank">Adam Klosowicz</a>.
+- Copyright 2020 © <a href="http://klosowi.cz" target="_blank">Adam Klosowicz</a>
