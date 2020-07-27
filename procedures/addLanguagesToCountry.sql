@@ -12,7 +12,7 @@ BEGIN
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
 		SET is_success = 0;
-		IF is_in_transaction() != 1 THEN
+		IF is_in_transaction() = 1 THEN
 			ROLLBACK;
 		END IF;
 	END;
@@ -23,7 +23,5 @@ BEGIN
 	PREPARE stmt FROM @tmp_query;
 	EXECUTE stmt;
 	DEALLOCATE PREPARE stmt;
-
-	SELECT @is_success;
 END$$
 DELIMITER ;

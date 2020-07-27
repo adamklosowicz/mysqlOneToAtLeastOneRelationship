@@ -20,7 +20,6 @@ BEGIN
 	DELETE FROM country WHERE id=country_id_to_delete;
 	SET SQL_SAFE_UPDATES = 1;
 	COMMIT;
-	SELECT @is_success;
 END$$
 DELIMITER ;
 

@@ -13,7 +13,11 @@ BEGIN
 	DECLARE sub_str_len INT;
 	DECLARE decorated_string TEXT;
 	DECLARE item VARCHAR(50);
-  
+
+	IF operated_string IS NULL OR operated_string = '' THEN
+		RETURN '';
+	END IF;
+
 	for_each_item: LOOP
 		SET str_len = CHAR_LENGTH(operated_string);
 		SET item = SUBSTRING_INDEX(operated_string, delimiter_char, 1);
