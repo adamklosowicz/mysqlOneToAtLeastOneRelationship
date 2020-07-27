@@ -29,7 +29,6 @@ BEGIN
 			SET is_success = 1;
 			COMMIT;
 	END CASE;
-	SELECT @is_success;
 END$$
 DELIMITER ;
 

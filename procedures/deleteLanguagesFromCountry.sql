@@ -1,4 +1,4 @@
-DROP PROCEDURE IF EXISTS `delete_languages`;
+DROP PROCEDURE IF EXISTS `delete_languages_from_country`;
 
 DELIMITER $$
 
@@ -19,7 +19,7 @@ BEGIN
 		SET is_success = 0;
 	END;
 
-	SET all_languages_count = (SELECT count(*) FROM language WHERE country_id=operated_country_id);
+	SET all_languages_count = (SELECT count(*) FROM language WHERE country_id=@operated_country_id);
 	SET languages_selected_count = get_char_occurance(lang_names_to_delete, ';')+1;
 
 	IF all_languages_count - languages_selected_count < 1 THEN
@@ -47,7 +47,6 @@ BEGIN
 			SET is_success = 1;
 		END IF;
 	END IF;
-	SELECT @is_success;
 END$$
 DELIMITER ;
 

@@ -23,7 +23,5 @@ BEGIN
 	PREPARE stmt FROM @tmp_query;
 	EXECUTE stmt;
 	DEALLOCATE PREPARE stmt;
-
-	SELECT @is_success;
 END$$
 DELIMITER ;

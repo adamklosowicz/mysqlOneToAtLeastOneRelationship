@@ -23,7 +23,6 @@ BEGIN
 	IF @languages_added_correctly = 0 THEN
 		SET new_country_id = NULL;
 	END IF;
-	SELECT @new_country_id;
 END$$
 DELIMITER ;
 
