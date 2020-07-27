@@ -11,7 +11,6 @@ BEGIN
 	DECLARE languages_count INT;
 	BEGIN
 		SET is_success = 0;
-		ROLLBACK;
 	END;
 
 	SET languages_count = (SELECT count(*) FROM language WHERE country_id=operated_country_id);
