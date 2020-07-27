@@ -1,7 +1,8 @@
 # One to many (at least one) relationship
 
-The designed solution supports managing database relationship <i>one-to-many</i>, considering that element of the A entity must be assigned to at least one element from the B entity.
-Designed example solves the problem of mananging countries with the languages that are used there (in each country people speak at least one language).
+The designed solution supports managing <i>one-to-many</i> relationship on the database level. Considering that element of the A entity must be assigned to at least one element from the B entity.
+
+The mechanism solves the problem of mananging countries with the languages that are used there (in each country citizens speak at least one language).
 
 # Usage of the designed MySQL mechanism
 
