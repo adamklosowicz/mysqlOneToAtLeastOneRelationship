@@ -9,37 +9,20 @@ CREATE PROCEDURE `add_languages_to_country`(
 )
 BEGIN
 	DECLARE is_in_transaction TINYINT;
-	DECLARE str_len INT;
-	DECLARE sub_str_len INT;
-	DECLARE language_name VARCHAR(50);
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
 		SET is_success = 0;
-		ROLLBACK;
+		IF is_in_transaction() != 1 THEN
+			ROLLBACK;
+		END IF;
 	END;
 
 	SET is_success = 1;
 
-	SET is_in_transaction = is_in_transaction();
-	IF is_in_transaction != 1 THEN
-		START TRANSACTION;
-	END IF;
-
-	for_each_language: LOOP
-		SET str_len = CHAR_LENGTH(language_name_list);
-        	SET language_name = SUBSTRING_INDEX(language_name_list, ';', 1);
-		INSERT INTO language(country_id, name) VALUES (country_id, language_name);
-		SET sub_str_len = CHAR_LENGTH(language_name)+2;
-		SET language_name_list = MID(language_name_list, sub_str_len, str_len);
-
-		IF language_name_list = '' THEN
-			LEAVE for_each_language;
-		END IF;
-	END LOOP for_each_language;
-
-	IF is_in_transaction != 1 THEN
-		COMMIT;
-	END IF;
+	SET @tmp_query = create_insert_languages_query(country_id, language_name_list);
+	PREPARE stmt FROM @tmp_query;
+	EXECUTE stmt;
+	DEALLOCATE PREPARE stmt;
 
 	SELECT @is_success;
 END$$
